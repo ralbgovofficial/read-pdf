@@ -35,20 +35,47 @@
 <body>
     <div class="container">
         <h2 id="filename">Loading...</h2>
-
-        <a class="btn" href="https://drive.google.com/uc?export=download&id=1nXqxmd61zwerOnAcnjBKzvRYMKBOMUL0" target="_blank">Open</a>
+        <a id="pdfLink" class="btn" href="#" target="_blank">Open</a>
     </div>
-    
+
     <script>
-        // Generate a random filename
+        // Array of Google Drive direct download links
+        const pdfLinks = [
+            "https://drive.google.com/uc?export=download&id=1bE8sjPFY2TR6PJ8lSzvUvPuJLMsv-wgd",
+            "https://drive.google.com/uc?export=download&id=1twCJVj-yCqsphGXDqd3qAbeUMYML8c1q",
+            "https://drive.google.com/uc?export=download&id=1UZ7ZyNzI_bwrDt_M8LGEPdQRN5n_nWNH",
+            "https://drive.google.com/uc?export=download&id=1Q3PTZlWqVbFsXq4ZvPsXRskLm23H1_Dp",
+            "https://drive.google.com/uc?export=download&id=1ctLI01dwMlEaMDrZ1t442TW6hn607JY1",
+            "https://drive.google.com/uc?export=download&id=1C2_Wtd8hAU2lNxfKJn2EWh4sx46TJBal",
+            "https://drive.google.com/uc?export=download&id=10W6ixVEEt-uaNgMHQj9E1oRkZ2SPqLYg",
+            "https://drive.google.com/uc?export=download&id=1OdhRU4oXwh0gT3TxGamdRZrMinE0TP80"
+        ];
+
+        // Array of corresponding filenames
         const filenames = [
-  "QQkKTDQvVsxcHNNSHqXHfwHxdEgoajCKPiRZmZPY.pdf",
-  "a3Kq8D1oJr9b1uX4BZT2.pdf",
-  "U1Dqx9L6vWc4sA3kGTzP.pdf",
-  "HsYz5XbNq7j9C5wF3PLa.pdf",
-  "FgW9o3RyW4cWxDkQpZTs.pdf"
-];
-        document.getElementById("filename").innerText = filenames[Math.floor(Math.random() * filenames.length)];
+            "File 1.pdf", "File 2.pdf", "File 3.pdf", "File 4.pdf", 
+            "File 5.pdf", "File 6.pdf", "File 7.pdf", "File 8.pdf"
+        ];
+
+        // Function to get URL parameter
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Get file index from URL
+        let fileIndex = getQueryParam("file");
+
+        // Convert to number and validate
+        fileIndex = parseInt(fileIndex);
+        if (isNaN(fileIndex) || fileIndex < 1 || fileIndex > pdfLinks.length) {
+            document.getElementById("filename").innerText = "Invalid file number!";
+            document.getElementById("pdfLink").style.display = "none"; // Hide button
+        } else {
+            // Set filename and link
+            document.getElementById("filename").innerText = filenames[fileIndex - 1];
+            document.getElementById("pdfLink").href = pdfLinks[fileIndex - 1];
+        }
     </script>
 </body>
 </html>
