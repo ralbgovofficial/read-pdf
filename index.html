@@ -40,48 +40,34 @@
 
     <script>
         // Array of Google Drive direct download links
-        const pdfLinks = [
-            "https://drive.google.com/uc?export=download&id=1bE8sjPFY2TR6PJ8lSzvUvPuJLMsv-wgd",
-            "https://drive.google.com/uc?export=download&id=1twCJVj-yCqsphGXDqd3qAbeUMYML8c1q",
-            "https://drive.google.com/uc?export=download&id=1UZ7ZyNzI_bwrDt_M8LGEPdQRN5n_nWNH",
-            "https://drive.google.com/uc?export=download&id=1Q3PTZlWqVbFsXq4ZvPsXRskLm23H1_Dp",
-            "https://drive.google.com/uc?export=download&id=1ctLI01dwMlEaMDrZ1t442TW6hn607JY1",
-            "https://drive.google.com/uc?export=download&id=1C2_Wtd8hAU2lNxfKJn2EWh4sx46TJBal",
-            "https://drive.google.com/uc?export=download&id=10W6ixVEEt-uaNgMHQj9E1oRkZ2SPqLYg",
-            "https://drive.google.com/uc?export=download&id=1OdhRU4oXwh0gT3TxGamdRZrMinE0TP80"
-        ];
+       // Mapping of unique file names to their links
+const fileMap = {
+    "TLpbnWp6lO0uwFIuDmovXQ": "https://drive.google.com/uc?export=download&id=1bE8sjPFY2TR6PJ8lSzvUvPuJLMsv-wgd",
+    "Czb-T9nQITp1aOvwWFcR4Q": "https://drive.google.com/uc?export=download&id=1twCJVj-yCqsphGXDqd3qAbeUMYML8c1q",
+    "BXqr5Hs9LRNiJw0zMdxHmw": "https://drive.google.com/uc?export=download&id=1UZ7ZyNzI_bwrDt_M8LGEPdQRN5n_nWNH",
+    "AR8usxF2kzezZklnvdiagg": "https://drive.google.com/uc?export=download&id=1Q3PTZlWqVbFsXq4ZvPsXRskLm23H1_Dp",
+    "XYluXc98SZ-LUVrUBqHMfA": "https://drive.google.com/uc?export=download&id=1ctLI01dwMlEaMDrZ1t442TW6hn607JY1",
+    "NLS0XXSuIBHRhNKCFRb8yw": "https://drive.google.com/uc?export=download&id=1C2_Wtd8hAU2lNxfKJn2EWh4sx46TJBal",
+    "JlDMbLor1mujuFOkEDbZpw": "https://drive.google.com/uc?export=download&id=10W6ixVEEt-uaNgMHQj9E1oRkZ2SPqLYg",
+    "TQmEvXOQ28IQm9tNjNWEow": "https://drive.google.com/uc?export=download&id=1OdhRU4oXwh0gT3TxGamdRZrMinE0TP80"
+};
 
-        // Array of corresponding filenames
-        const filenames = [
-    "TLpbnWp6lO0uwFIuDmovXQ.pdf",
-    "Czb-T9nQITp1aOvwWFcR4Q.pdf",
-    "BXqr5Hs9LRNiJw0zMdxHmw.pdf",
-    "AR8usxF2kzezZklnvdiagg.pdf",
-    "XYluXc98SZ-LUVrUBqHMfA.pdf",
-    "NLS0XXSuIBHRhNKCFRb8yw.pdf",
-    "JlDMbLor1mujuFOkEDbZpw.pdf",
-    "TQmEvXOQ28IQm9tNjNWEow.pdf"
-];
+// Function to get URL parameter
+function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+}
 
-        // Function to get URL parameter
-        function getQueryParam(param) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
-        }
+// Get file ID from URL
+let fileKey = getQueryParam("file");
 
-        // Get file index from URL
-        let fileIndex = getQueryParam("file");
-
-        // Convert to number and validate
-        fileIndex = parseInt(fileIndex);
-        if (isNaN(fileIndex) || fileIndex < 1 || fileIndex > pdfLinks.length) {
-            document.getElementById("filename").innerText = "Invalid file number!";
-            document.getElementById("pdfLink").style.display = "none"; // Hide button
-        } else {
-            // Set filename and link
-            document.getElementById("filename").innerText = filenames[fileIndex];
-            document.getElementById("pdfLink").href = pdfLinks[fileIndex - 1];
-        }
+if (fileKey && fileMap[fileKey]) {
+    document.getElementById("filename").innerText = fileKey + ".pdf"; // Display filename
+    document.getElementById("pdfLink").href = fileMap[fileKey]; // Set correct link
+} else {
+    document.getElementById("filename").innerText = "Invalid file!";
+    document.getElementById("pdfLink").style.display = "none"; // Hide button
+}
     </script>
 </body>
 </html>
